@@ -81,12 +81,12 @@ io.on("connection", (socket) => {
     io.emit("receiveMessage", data);
   });
 
-  socket.on("typing", ({ room, groupId, username }) => {
-    io.to(room || groupId).emit("userTyping", { username });
+  socket.on("typing", ({username  }) => {
+    io.emit("userTyping", { username });
   });
 
-  socket.on("stopTyping", ({ room, groupId, username }) => {
-    io.to(room || groupId).emit("userStoppedTyping", { username });
+  socket.on("stopTyping", ({ username }) => {
+    io.emit("userStoppedTyping", { username });
   });
 
   socket.on("disconnect", async () => {

@@ -48,6 +48,7 @@ const Chat = () => {
       socket.disconnect();
     };
   }, [user, selectedUser, groupId]);
+            console.log(typing)
 
   const sendMessage = async (e) => {
     e.preventDefault();
@@ -72,9 +73,9 @@ const Chat = () => {
 
   const handleTyping = () => {
     if (!user) return;
-    socket.emit("typing", { username: user?.username, room });
+    socket.emit("typing", { username: user?.username });
     setTimeout(() => {
-      socket.emit("stopTyping", { username: user?.username, room });
+      socket.emit("stopTyping", { username: user?.username });
     }, 2000);
   };
 
@@ -125,6 +126,11 @@ const Chat = () => {
         ) : ( */}
         <div className="p-4 bg-[#202C33] text-center flex text-gray-400">
           Messages
+          {typing && (
+            <p className="text-sm ml-10 text-green-400 animate-pulse">
+              {typing} is typing...
+            </p>
+          )}
           <button className="ml-auto text-red-400" onClick={logout}>
             Logout
           </button>
@@ -133,28 +139,18 @@ const Chat = () => {
 
         {/* Messages Area */}
         <div className="flex-1 overflow-auto p-4 space-y-3">
-          {messages.map(
-            (msg, index) => (
-              console.log("inside map", message),
-              (
-                <div
-                  key={msg._id}
-                  className={`p-3 max-w-xs rounded-xl shadow-md ${
-                    (msg.sender?._id || msg.senderId) === user?.id
-                      ? "ml-auto bg-[#128C7E]"
-                      : " bg-[#2A3C44]"
-                  }`}
-                >
-                  <p className="text-base">{msg.content}</p>
-                </div>
-              )
-            )
-          )}
-          {typing && (
-            <p className="text-sm text-green-400 animate-pulse">
-              {typing} is typing...
-            </p>
-          )}
+          {messages.map((msg, index) => (
+            <div
+              key={msg._id}
+              className={`p-3 max-w-xs rounded-xl shadow-md ${
+                (msg.sender?._id || msg.senderId) === user?.id
+                  ? "ml-auto bg-[#128C7E]"
+                  : " bg-[#2A3C44]"
+              }`}
+            >
+              <p className="text-base">{msg.content}</p>
+            </div>
+          ))}
         </div>
 
         {/* Message Input */}
