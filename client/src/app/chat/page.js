@@ -61,7 +61,6 @@ const Chat = () => {
     };
 
     socket.emit("sendMessage", newMessage);
-    // setMessages((prev) => [...prev, newMessage]);
     setMessage("");
 
     try {
@@ -96,7 +95,6 @@ const Chat = () => {
           {users.map((u, index) => (
             <button
               key={index}
-              //   onClick={() => setSelectedUser(u)}
               className={`flex items-center px-4 py-3 rounded-lg w-full text-left transition  bg-[#128C7E] text-white" ${
                 u?.userId === user?.id ? "hidden" : "block"
               } 

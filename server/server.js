@@ -20,7 +20,6 @@ const server = http.createServer(app);
 app.use(cors());
 app.use(express.json());
 
-// Connect to Database
 dbConnection()
   .then(() => console.log(" Database Connected Successfully"))
   .catch((err) => console.error(" Database Connection Failed:", err));
