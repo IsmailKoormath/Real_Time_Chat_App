@@ -112,7 +112,6 @@ const Chat = () => {
         </div>
       </div>
 
-      {/* Chat Area */}
       <div className="flex-1 flex flex-col">
         {/* Chat Header */}
         {/* {selectedUser ? (
@@ -137,11 +136,10 @@ const Chat = () => {
         </div>
         {/* )} */}
 
-        {/* Messages Area */}
         <div className="flex-1 overflow-auto p-4 space-y-3">
           {messages.map((msg, index) => (
             <div
-              key={msg._id}
+              key={index}
               className={`p-3 max-w-xs rounded-xl shadow-md ${
                 (msg.sender?._id || msg.senderId) === user?.id
                   ? "ml-auto bg-[#128C7E]"
@@ -153,7 +151,6 @@ const Chat = () => {
           ))}
         </div>
 
-        {/* Message Input */}
         <form
           onSubmit={sendMessage}
           className="p-4 bg-[#202C33] flex items-center border-t border-gray-700"

@@ -19,7 +19,6 @@ export const setAuthToken = (token) => {
   }
 };
 
-// Check and set token only in the browser
 if (typeof window !== "undefined") {
   const token = localStorage.getItem("token");
   if (token) setAuthToken(token);
